@@ -23,13 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // --- Routes ---
-// Route de test pour vérifier que le serveur fonctionne
-app.get('/', (req, res) => {
-  res.send('API du Projet GL est en cours de fonctionnement...');
-});
-
-// (Nous ajouterons les routes pour les individus ici plus tard)
-// app.use('/api/individuals', require('./routes/individualRoutes'));
+// Indique à l'application d'utiliser le fichier de routes pour toutes les requêtes
+// qui commencent par /api/individuals
+app.use('/api/individuals', require('./routes/individualRoutes'));
 
 
 // --- Démarrage du serveur ---
