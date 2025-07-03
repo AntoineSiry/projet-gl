@@ -1,30 +1,25 @@
-// Importe Express pour créer le routeur
 const express = require('express');
 const router = express.Router();
 
-// Importe les fonctions du contrôleur
 const { 
+    createInitialTree, // Nom mis à jour
     createIndividual,
     getIndividualsByTreeId,
+    getIndividualById,
     updateIndividual,
-    deleteIndividual
+    deleteIndividual,
+    deleteTree
 } = require('../controllers/individualController');
 
-// Définit la route pour créer un individu.
-// POST /api/individuals
+// --- ROUTES POUR LES ARBRES ---
+router.post('/create-tree', createInitialTree); // Utilise la nouvelle fonction
+router.delete('/tree/:treeId', deleteTree);
+
+// --- ROUTES POUR LES INDIVIDUS ---
 router.post('/', createIndividual);
-
-// Définit la route pour récupérer tous les individus d'un arbre.
-// GET /api/individuals/:treeId
-router.get('/:treeId', getIndividualsByTreeId);
-
-// Définit la route pour mettre à jour un individu par son ID unique.
-// PUT /api/individuals/:id
+router.get('/tree/:treeId', getIndividualsByTreeId);
+router.get('/person/:id', getIndividualById);
 router.put('/:id', updateIndividual);
-
-// Définit la route pour supprimer un individu par son ID unique.
-// DELETE /api/individuals/:id
 router.delete('/:id', deleteIndividual);
 
-// Exporte le routeur pour l'utiliser dans server.js
 module.exports = router;
